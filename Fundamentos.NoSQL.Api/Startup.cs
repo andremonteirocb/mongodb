@@ -23,7 +23,7 @@ namespace Fundamentos.NoSQL
 
         private static void LoadMiddlewares(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddLoggerMiddleware();
+            //services.AddLoggerMiddleware();
             services.AddSwaggerService();
             services.AddDependencyInjection(configuration);
         }

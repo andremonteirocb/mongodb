@@ -56,7 +56,6 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                _logger.LogInformation($"APIContagem - Valor Atual: 2");
                 _userServices.Insert(user);
                 return Ok();
             }

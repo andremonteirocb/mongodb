@@ -17,7 +17,7 @@ namespace Fundamentos.NoSQL
                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                .Enrich.FromLogContext()
                .WriteTo.Console()
-               .WriteTo.MongoDB(databaseUrl: "mongodb://root:example2@localhost:27017/LogDB", collectionName: "logs")
+               .WriteTo.MongoDB(databaseUrl: "mongodb://root:example@localhost:27017/LogDB", collectionName: "logs")
                .CreateLogger();
 
             Serilog.Debugging.SelfLog.Enable(msg => Debug.WriteLine(msg));
