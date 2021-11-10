@@ -5,21 +5,21 @@ using System;
 namespace Fundamentos.NoSQL.Domain.Entities
 {
     [BsonIgnoreExtraElements]
-    public sealed class User : Entity
+    public sealed class Produto : Entity
     {
-        public User(string mail, string name)
+        public Produto(string name, string description)
         {
-            Mail = mail;
             Name = name;
+            Description = description;
         }
 
-        public string Mail { get; private set; }
         public string Name { get; private set; }
+        public string Description { get; private set; }
 
-        public void AtualizarUsuario(string mail, string name)
+        public void AtualizarProduto(string name, string description)
         {
-            Mail = mail;
             Name = name;
+            Description = description;
         }
     }
 }

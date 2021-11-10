@@ -9,10 +9,13 @@ namespace Fundamentos.NoSQL.Domain.Settings
         public int Port { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
+        public string ConnectionStringProduction { get; set; }
         public string ConnectionString
         {
             get
             {
+                if (!string.IsNullOrEmpty(ConnectionStringProduction)) return ConnectionStringProduction;
+
                 if (string.IsNullOrEmpty(User) || string.IsNullOrEmpty(Password))
                     return $@"mongodb://{Host}:{Port}";
                 return $@"mongodb://{User}:{Password}@{Host}:{Port}";

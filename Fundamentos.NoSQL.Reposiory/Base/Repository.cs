@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Fundamentos.NoSQL.Domain.Interfaces;
+using System.Collections.Generic;
 
 namespace Fundamentos.NoSQL.Data.Base
 {
@@ -15,14 +16,17 @@ namespace Fundamentos.NoSQL.Data.Base
             _collectionName = dataBase.GetCollection<T>(typeof(T).Name);
         }
 
-        public IQueryable<T> QueryAll()
+        public List<T> QueryAll()
         {
-            return _collectionName.AsQueryable<T>();
+            //return _collectionName.AsQueryable<T>();
+            return _collectionName.Find(a => true).ToList();
         }
 
-        public T Query(Guid key)
+        public T Query(Guid id)
         {
-            return _collectionName.AsQueryable<T>().FirstOrDefault(w => w.Key == key);
+            var o = _collectionName.Find(a => a.Id == id).FirstOrDefault();
+            //return _collectionName.AsQueryable<T>().FirstOrDefault(w => w.Id == key);
+            return o;
         }
 
         public void Insert(T obj)
@@ -30,9 +34,14 @@ namespace Fundamentos.NoSQL.Data.Base
             _collectionName.InsertOne(obj);
         }
 
+        public void Update(Guid id, T obj)
+        {
+            _collectionName.ReplaceOne(a => a.Id == id, obj);
+        }
+
         public void Delete(Guid id)
         {
-            _collectionName.DeleteOne(a => a.Key == id);
+            _collectionName.DeleteOne(a => a.Id == id);
         }
     }
 }

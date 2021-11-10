@@ -18,11 +18,14 @@ namespace Fundamentos.NoSQL.Middlewares
             services.AddSingleton<IMongoDBConfig>(sp =>
                 sp.GetRequiredService<IOptions<MongoDBConfig>>().Value);
 
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductServices, ProductServices>();
+            services.AddScoped<IProdutoRepository, ProductRepository>();
+            services.AddScoped<IProdutoServices, ProdutoServices>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserServices, UserServices>();
+
+            services.AddScoped<ITarefaRepository, TarefaRepository>();
+            services.AddScoped<ITarefaServices, TarefaServices>();
         }
     }
 }

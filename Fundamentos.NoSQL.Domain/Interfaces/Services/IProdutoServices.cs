@@ -2,7 +2,7 @@
 
 namespace Fundamentos.NoSQL.Domain.Interfaces
 {
-    public interface IProductServices : IRepository<Product>
+    public interface IProdutoServices : IRepository<Produto>
     {
     }
 }

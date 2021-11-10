@@ -5,11 +5,11 @@ namespace Fundamentos.NoSQL.Domain.Base
 {
     public abstract class Entity : IEntity
     {
-        public Guid Key { get; set; }
+        public Guid Id { get; set; }
 
         protected Entity()
         {
-            this.Key = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
     }
 }

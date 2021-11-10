@@ -3,9 +3,9 @@ using Fundamentos.NoSQL.Domain.Interfaces;
 
 namespace Fundamentos.NoSQL.Services
 {
-    public class ProductServices : BaseService<Product>, IProductServices
+    public class ProdutoServices : BaseService<Produto>, IProdutoServices
     {
-        public ProductServices(IProductRepository productRepository)
+        public ProdutoServices(IProdutoRepository productRepository)
             : base(productRepository)
         {
         }

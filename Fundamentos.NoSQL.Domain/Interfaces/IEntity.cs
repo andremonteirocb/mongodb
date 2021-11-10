@@ -4,6 +4,6 @@ namespace Fundamentos.NoSQL.Domain.Interfaces
 {
     public interface IEntity
     {
-        Guid Key { get; set; }
+        Guid Id { get; set; }
     }
 }

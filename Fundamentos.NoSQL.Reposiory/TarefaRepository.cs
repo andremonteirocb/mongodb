@@ -4,9 +4,9 @@ using Fundamentos.NoSQL.Data.Base;
 
 namespace Fundamentos.NoSQL.Data
 {
-    public sealed class ProductRepository : Repository<Produto>, IProdutoRepository
+    public sealed class TarefaRepository : Repository<Tarefa>, ITarefaRepository
     {
-        public ProductRepository(IMongoDBConfig config) 
+        public TarefaRepository(IMongoDBConfig config)
             : base(config)
         {
         }

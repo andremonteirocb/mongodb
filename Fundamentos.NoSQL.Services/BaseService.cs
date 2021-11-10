@@ -1,5 +1,6 @@
 ﻿using Fundamentos.NoSQL.Domain.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Fundamentos.NoSQL.Services
@@ -12,19 +13,24 @@ namespace Fundamentos.NoSQL.Services
             _repository = repository;
         }
 
-        public IQueryable<T> QueryAll()
+        public List<T> QueryAll()
         {
             return _repository.QueryAll();
         }
 
-        public T Query(Guid key)
+        public T Query(Guid id)
         {
-            return _repository.Query(key);
+            return _repository.Query(id);
         }
 
         public void Insert(T obj)
         {
             _repository.Insert(obj);
+        }
+
+        public void Update(Guid id, T obj)
+        {
+            _repository.Update(id, obj);
         }
 
         public void Delete(Guid id)

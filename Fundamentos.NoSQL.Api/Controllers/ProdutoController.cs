@@ -11,23 +11,23 @@ namespace Fundamentos.NoSQL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ProdutoController : ControllerBase
     {
-        private readonly IUserServices _userServices;
-        private readonly ILogger<UserController> _logger;
-        public UserController(IUserServices userServices, 
-            ILogger<UserController> logger)
+        private readonly IProdutoServices _productServices;
+        private readonly ILogger<ProdutoController> _logger;
+        public ProdutoController(IProdutoServices productServices, 
+            ILogger<ProdutoController> logger)
         {
-            _userServices = userServices;
+            _productServices = productServices;
             _logger = logger;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetAll()
+        public ActionResult<IEnumerable<Produto>> GetAll()
         {
             try
             {
-                var result = _userServices.QueryAll();
+                var result = _productServices.QueryAll();
                 return Ok(result);
             }
             catch (Exception exception)
@@ -38,15 +38,15 @@ namespace Fundamentos.NoSQL.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<User> Get([FromRoute] Guid id)
+        public ActionResult<Produto> Get([FromRoute] Guid id)
         {
             try
             {
-                var user = _userServices.Query(id);
-                if (user == null)
+                var product = _productServices.Query(id);
+                if (product == null)
                     return NotFound();
 
-                return Ok(user);
+                return Ok(product);
             }
             catch (Exception exception)
             {
@@ -56,37 +56,37 @@ namespace Fundamentos.NoSQL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] UserInputModel novoUsuario)
+        public IActionResult Post([FromBody] ProdutoInputModel novoProduto)
         {
             try
             {
-                var user = new User(novoUsuario.Mail, novoUsuario.Name);
+                var produto = new Produto(novoProduto.Name, novoProduto.Description);
 
-                _userServices.Insert(user);
+                _productServices.Insert(produto);
 
-                return Created("", user);
+                return Created("", produto);
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, exception.Message, novoUsuario);
+                _logger.LogError(exception, exception.Message, novoProduto);
                 return new StatusCodeResult(500);
             }
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] UserInputModel usuarioAtualizado)
+        public IActionResult Put(Guid id, [FromBody] ProdutoInputModel produtoAtualizado)
         {
             try
             {
-                var user = _userServices.Query(id);
-                if (user == null)
+                var produto = _productServices.Query(id);
+                if (produto == null)
                     return NotFound();
 
-                user.AtualizarUsuario(usuarioAtualizado.Mail, usuarioAtualizado.Name);
+                produto.AtualizarProduto(produtoAtualizado.Name, produtoAtualizado.Description);
 
-                _userServices.Update(id, user);
+                _productServices.Update(id, produto);
 
-                return Ok(user);
+                return Ok(produto);
             }
             catch (Exception exception)
             {
@@ -96,15 +96,15 @@ namespace Fundamentos.NoSQL.Controllers
         }
 
         [HttpDelete]
-        public ActionResult<User> Delete(Guid id)
+        public ActionResult<Produto> Delete(Guid id)
         {
             try
             {
-                var user = _userServices.Query(id);
-                if (user == null)
+                var product = _productServices.Query(id);
+                if (product == null)
                     return NotFound();
 
-                _userServices.Delete(id);
+                _productServices.Delete(id);
                 return Ok();
             }
             catch (Exception exception)
