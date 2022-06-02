@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Events;
 using System;
@@ -17,7 +16,7 @@ namespace Fundamentos.NoSQL
                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                .Enrich.FromLogContext()
                .WriteTo.Console()
-               .WriteTo.MongoDB(databaseUrl: "mongodb://root:example@localhost:27017/LogDB", collectionName: "logs")
+               .WriteTo.MongoDB(databaseUrl: "mongodb://root:example@localhost:27017/admin", collectionName: "logs")
                .CreateLogger();
 
             Serilog.Debugging.SelfLog.Enable(msg => Debug.WriteLine(msg));
