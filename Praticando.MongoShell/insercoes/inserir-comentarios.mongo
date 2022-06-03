@@ -108,57 +108,6 @@ db.artigos.update({ slug: "faculdade-e-diploma-sao-necessarios-para-programar" }
     }
 );
 
-db.artigos.update({ slug: "conhecendo-o-flutter-e-uma-visao-do-desenvolvimento-mobile" },
-    {
-    $set: {
-        comentarios: [
-                {
-                    nome: "Isabela",
-                    email: "isabela@example.org",
-                    texto: "Bacana!",
-                    data: ISODate('2019-01-23')
-                },
-                {
-                    nome: "Tiago",
-                    email: "tiago@example.org",
-                    texto: "Gostei!",
-                    data: ISODate('2019-02-27')
-                },
-                {
-                    nome: "Bianca",
-                    email: "bianca@example.org",
-                    texto: "Não gostei",
-                    data: ISODate('2019-03-14')
-                },
-                {
-                    nome: "José",
-                    email: "jose@example.org",
-                    texto: "Gostei!",
-                    data: ISODate('2019-04-24')
-                },
-                {
-                    nome: "Júlio",
-                    email: "julio@example.org",
-                    texto: "show!",
-                    data: ISODate('2019-05-28')
-                },
-                {
-                    nome: "Matheus",
-                    email: "matheus@example.org",
-                    texto: "gostei",
-                    data: ISODate('2019-06-16')
-                },
-                {
-                    nome: "Melissa",
-                    email: "melissa@example.org",
-                    texto: "bom!",
-                    data: ISODate('2019-07-22')
-                }
-            ]
-        }
-    }
-);
-
 db.artigos.update({ slug: "criando-e-publicando-uma-biblioteca-javascript-no-npm" },
     {
     $set: {
