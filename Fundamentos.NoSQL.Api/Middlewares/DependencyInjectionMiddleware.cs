@@ -26,6 +26,9 @@ namespace Fundamentos.NoSQL.Middlewares
 
             services.AddScoped<ITarefaRepository, TarefaRepository>();
             services.AddScoped<ITarefaServices, TarefaServices>();
+
+            services.AddScoped<IPublicacaoRepository, PublicacaoRepository>();
+            services.AddScoped<IPublicacaoServices, PublicacaoServices>();
         }
     }
 }

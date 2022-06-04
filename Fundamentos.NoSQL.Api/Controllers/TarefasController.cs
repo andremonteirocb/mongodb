@@ -41,7 +41,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var tarefa = _tarefasService.Query(id);
+                var tarefa = _tarefasService.GetById(id);
                 if (tarefa == null)
                     return NotFound();
 
@@ -77,7 +77,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var tarefa = _tarefasService.Query(id);
+                var tarefa = _tarefasService.GetById(id);
 
                 if (tarefa == null)
                     return NotFound();
@@ -100,7 +100,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var tarefa = _tarefasService.Query(id);
+                var tarefa = _tarefasService.GetById(id);
                 if (tarefa == null)
                     return NotFound();
 

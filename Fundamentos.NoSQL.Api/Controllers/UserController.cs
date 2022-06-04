@@ -42,7 +42,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var user = _userServices.Query(id);
+                var user = _userServices.GetById(id);
                 if (user == null)
                     return NotFound();
 
@@ -78,7 +78,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var user = _userServices.Query(id);
+                var user = _userServices.GetById(id);
                 if (user == null)
                     return NotFound();
 
@@ -100,7 +100,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var user = _userServices.Query(id);
+                var user = _userServices.GetById(id);
                 if (user == null)
                     return NotFound();
 

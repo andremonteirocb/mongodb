@@ -41,7 +41,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var product = _productServices.Query(id);
+                var product = _productServices.GetById(id);
                 if (product == null)
                     return NotFound();
 
@@ -77,7 +77,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var produto = _productServices.Query(id);
+                var produto = _productServices.GetById(id);
                 if (produto == null)
                     return NotFound();
 
@@ -99,7 +99,7 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var product = _productServices.Query(id);
+                var product = _productServices.GetById(id);
                 if (product == null)
                     return NotFound();
 

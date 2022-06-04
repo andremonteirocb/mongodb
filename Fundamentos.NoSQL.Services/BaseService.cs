@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Fundamentos.NoSQL.Services
 {
@@ -13,14 +14,19 @@ namespace Fundamentos.NoSQL.Services
             _repository = repository;
         }
 
-        public List<T> QueryAll()
+        public List<T> QueryAll(int? limit = 0)
         {
-            return _repository.QueryAll();
+            return _repository.QueryAll(limit);
         }
 
-        public T Query(Guid id)
+        public T Query(Expression<Func<T, bool>> expression)
         {
-            return _repository.Query(id);
+            return _repository.Query(expression);
+        }
+
+        public T GetById(Guid id)
+        {
+            return _repository.GetById(id);
         }
 
         public void Insert(T obj)
