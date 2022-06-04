@@ -16,7 +16,7 @@ namespace Fundamentos.NoSQL.Controllers
     public class PublicacaoController : ControllerBase
     {
         private IPublicacaoServices _publicacaoServices;
-        private readonly IMongoCollection<Publicacao> _collectionName;
+        //private readonly IMongoCollection<Publicacao> _collectionName;
         private readonly ILogger<PublicacaoController> _logger;
         public PublicacaoController(IPublicacaoServices publicacaoServices,
             IMongoDBConfig config,
@@ -25,9 +25,9 @@ namespace Fundamentos.NoSQL.Controllers
             _publicacaoServices = publicacaoServices;
             _logger = logger;
 
-            var client = new MongoClient(config.ConnectionString);
-            var dataBase = client.GetDatabase(config.Database);
-            _collectionName = dataBase.GetCollection<Publicacao>(nameof(Publicacao).ToLower());
+            //var client = new MongoClient(config.ConnectionString);
+            //var dataBase = client.GetDatabase(config.Database);
+            //_collectionName = dataBase.GetCollection<Publicacao>(nameof(Publicacao).ToLower());
         }
 
         [HttpGet]
@@ -100,13 +100,6 @@ namespace Fundamentos.NoSQL.Controllers
                 publicacao.AdicionarComentario(novoComentario.Nome, novoComentario.Conteudo);
                 _publicacaoServices.Update(id, publicacao);
 
-                //var comentario = new Comentario(novoComentario.Nome, novoComentario.Conteudo, DateTime.Now);
-
-
-                //_collectionName.UpdateOne(
-                //    p => p.Id == publicacao.Id,
-                //    Builders<Publicacao>.Update.Push(c => c.Comentarios, comentario));
-
                 return Ok(publicacao);
             }
             catch (Exception exception)
@@ -157,6 +150,18 @@ namespace Fundamentos.NoSQL.Controllers
                 _logger.LogError(exception, exception.Message);
                 return new StatusCodeResult(500);
             }
+        }
+
+        private void Builders()
+        {
+            //builders
+            var filter = Builders<Publicacao>.Filter.Eq(x => x.Name, "");
+            var sortDefinition = Builders<Publicacao>.Sort.Descending(x => x.Name);
+
+            //var comentario = new Comentario(novoComentario.Nome, novoComentario.Conteudo, DateTime.Now);
+            //_collectionName.UpdateOne(
+            //    p => p.Id == publicacao.Id,
+            //    Builders<Publicacao>.Update.Push(c => c.Comentarios, comentario));
         }
     }
 }
