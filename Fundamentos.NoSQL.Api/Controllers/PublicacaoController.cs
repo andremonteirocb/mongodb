@@ -158,13 +158,11 @@ namespace Fundamentos.NoSQL.Controllers
         private void Builders()
         {
             //builders
-            var filter = Builders<Publicacao>.Filter.Eq(x => x.Name, "");
-            var sortDefinition = Builders<Publicacao>.Sort.Descending(x => x.Name);
+            var filter = Builders<Publicacao>.Filter.Eq(x => x.Name, "") & 
+                Builders<Publicacao>.Filter.Eq(x => x.Name, "");
 
-            //var comentario = new Comentario(novoComentario.Nome, novoComentario.Conteudo, DateTime.Now);
-            //_collectionName.UpdateOne(
-            //    p => p.Id == publicacao.Id,
-            //    Builders<Publicacao>.Update.Push(c => c.Comentarios, comentario));
+            var sortDefinition = Builders<Publicacao>.Sort.Descending(x => x.Name)
+                .Descending(x => x.Description);
         }
     }
 }
