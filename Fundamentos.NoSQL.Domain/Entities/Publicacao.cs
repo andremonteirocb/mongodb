@@ -35,29 +35,38 @@ namespace Fundamentos.NoSQL.Domain.Entities
 
         public void AdicionarComentario(string name, string conteudo)
         {
-            Comentarios.Add(new Comentario(name, conteudo, DateTime.Now));
+            Comentarios.Add(new Comentario(Guid.NewGuid(), name, conteudo, DateTime.Now));
         }
     }
 
     public class Autor
     {
+        public Autor(Guid id)
+        {
+            Id = id;
+        }
+
         public Autor(string name)
         {
+            Id = Guid.NewGuid();
             Name = name;
         }
 
+        public Guid Id { get; set; }
         public string Name { get; private set; }
     }
 
     public class Comentario
     {
-        public Comentario(string name, string conteudo, DateTime dataCriacao)
+        public Comentario(Guid id, string name, string conteudo, DateTime dataCriacao)
         {
+            Id = id;
             Name = name;
             Conteudo = conteudo;
             DataCriacao = dataCriacao;
         }
 
+        public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Conteudo { get; private set; }
         public DateTime DataCriacao { get; private set; }

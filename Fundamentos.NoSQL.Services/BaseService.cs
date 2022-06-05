@@ -38,14 +38,19 @@ namespace Fundamentos.NoSQL.Services
             _repository.Replace(id, obj);
         }
 
-        public void Update(Expression<Func<T, bool>> condicao, Expression<Func<T, object>> expression, object value)
+        public void Update(Expression<Func<T, bool>> condicao, Expression<Func<T, object>> field, object value)
         {
-            _repository.Update(condicao, expression, value);
+            _repository.Update(condicao, field, value);
         }
 
-        public void Push(Expression<Func<T, bool>> condicao, Expression<Func<T, IEnumerable<object>>> expression, object value)
+        public void Push(Expression<Func<T, bool>> condicao, Expression<Func<T, IEnumerable<object>>> field, object value)
         {
-            _repository.Push(condicao, expression, value);
+            _repository.Push(condicao, field, value);
+        }
+
+        public void Pull<TEntityArray>(Expression<Func<T, bool>> condicao, Expression<Func<T, IEnumerable<TEntityArray>>> field, Expression<Func<TEntityArray, bool>> filter)
+        {
+            _repository.Pull(condicao, field, filter);
         }
 
         public void Delete(Guid id)

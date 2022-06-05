@@ -86,25 +86,6 @@ namespace Fundamentos.NoSQL.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("adicionarComentario")]
-        [ProducesResponseType(typeof(Comentario), StatusCodes.Status201Created)]
-        public IActionResult AdicionarComentario(Guid id, [FromBody] ComentarioInputModel novoComentario)
-        {
-            try
-            {
-                var comentario = new Comentario(novoComentario.Nome, novoComentario.Conteudo, DateTime.Now);
-                _publicacaoServices.Push(condition => condition.Id == id, o => o.Comentarios, comentario);
-
-                return Ok(comentario);
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(exception, exception.Message);
-                return new StatusCodeResult(500);
-            }
-        }
-
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(Publicacao), StatusCodes.Status200OK)]
         public IActionResult Put(Guid id, [FromBody] PublicacaoInputModel novaPublicacao)
@@ -138,6 +119,39 @@ namespace Fundamentos.NoSQL.Controllers
 
                 _publicacaoServices.Delete(id);
 
+                return NoContent();
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, exception.Message);
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpPost]
+        [Route("addComment/{publicacaoId}")]
+        [ProducesResponseType(typeof(Comentario), StatusCodes.Status201Created)]
+        public IActionResult AdicionarComentario(Guid publicacaoId, [FromBody] ComentarioInputModel novoComentario)
+        {
+            try
+            {
+                var comentario = _publicacaoServices.AdicionarComentario(publicacaoId, novoComentario.Nome, novoComentario.Conteudo);
+                return Created("", comentario);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, exception.Message);
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpPost]
+        [Route("removeComment/{publicacaoId}/{comentarioId}")]
+        public IActionResult RemoverComentario(Guid publicacaoId, Guid comentarioId)
+        {
+            try
+            {
+                _publicacaoServices.RemoverComentario(publicacaoId, comentarioId);
                 return NoContent();
             }
             catch (Exception exception)
