@@ -14,8 +14,8 @@ namespace Fundamentos.NoSQL.Data.Base
         protected Repository(IMongoDBConfig config)
         {
             var client = new MongoClient(config.ConnectionString);
-            var dataBase = client.GetDatabase(config.Database);
-            _collectionName = dataBase.GetCollection<T>(typeof(T).Name);
+            var dataBase = client.GetDatabase(config.Database.ToLower());
+            _collectionName = dataBase.GetCollection<T>(typeof(T).Name.ToLower());
         }
 
         public List<T> QueryAll(int? limit = 0)

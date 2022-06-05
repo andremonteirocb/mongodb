@@ -16,18 +16,12 @@ namespace Fundamentos.NoSQL.Controllers
     public class PublicacaoController : ControllerBase
     {
         private IPublicacaoServices _publicacaoServices;
-        //private readonly IMongoCollection<Publicacao> _collectionName;
         private readonly ILogger<PublicacaoController> _logger;
         public PublicacaoController(IPublicacaoServices publicacaoServices,
-            IMongoDBConfig config,
             ILogger<PublicacaoController> logger)
         {
             _publicacaoServices = publicacaoServices;
             _logger = logger;
-
-            //var client = new MongoClient(config.ConnectionString);
-            //var dataBase = client.GetDatabase(config.Database);
-            //_collectionName = dataBase.GetCollection<Publicacao>(nameof(Publicacao).ToLower());
         }
 
         [HttpGet]
