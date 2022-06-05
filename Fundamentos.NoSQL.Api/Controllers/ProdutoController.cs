@@ -83,7 +83,7 @@ namespace Fundamentos.NoSQL.Controllers
 
                 produto.AtualizarProduto(produtoAtualizado.Name, produtoAtualizado.Description);
 
-                _productServices.Update(id, produto);
+                _productServices.Replace(id, produto);
 
                 return Ok(produto);
             }

@@ -74,7 +74,7 @@ namespace Fundamentos.NoSQL.Controllers
                 var publicacao = new Publicacao(novaPublicacao.Nome, novaPublicacao.Description);
                 if (novaPublicacao.Autores.Any())
                     novaPublicacao.Autores.ForEach(a => publicacao.AdicionarAutor(a));
-                
+
                 _publicacaoServices.Insert(publicacao);
 
                 return Created("", publicacao);
@@ -88,19 +88,15 @@ namespace Fundamentos.NoSQL.Controllers
 
         [HttpPost]
         [Route("adicionarComentario")]
-        [ProducesResponseType(typeof(Publicacao), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Comentario), StatusCodes.Status201Created)]
         public IActionResult AdicionarComentario(Guid id, [FromBody] ComentarioInputModel novoComentario)
         {
             try
             {
-                var publicacao = _publicacaoServices.GetById(id);
-                if (publicacao == null)
-                    return NotFound();
+                var comentario = new Comentario(novoComentario.Nome, novoComentario.Conteudo, DateTime.Now);
+                _publicacaoServices.Push(condition => condition.Id == id, o => o.Comentarios, comentario);
 
-                publicacao.AdicionarComentario(novoComentario.Nome, novoComentario.Conteudo);
-                _publicacaoServices.Update(id, publicacao);
-
-                return Ok(publicacao);
+                return Ok(comentario);
             }
             catch (Exception exception)
             {
@@ -115,13 +111,12 @@ namespace Fundamentos.NoSQL.Controllers
         {
             try
             {
-                var publicacao = _publicacaoServices.Query(p => p.Comentarios.Any(c => c.Name == "caio meneguini"));
+                var publicacao = _publicacaoServices.GetById(id);
                 if (publicacao == null)
                     return NotFound();
 
                 publicacao.AtualizarPublicacao(novaPublicacao.Nome, novaPublicacao.Description);
-
-                _publicacaoServices.Update(id, publicacao);
+                _publicacaoServices.Replace(id, publicacao);
 
                 return Ok(publicacao);
             }

@@ -43,14 +43,19 @@ namespace Fundamentos.NoSQL.Data.Base
             _collectionName.InsertOne(obj);
         }
 
-        public void Update(Guid id, T obj)
+        public void Replace(Guid id, T obj)
         {
             _collectionName.ReplaceOne(a => a.Id == id, obj);
         }
 
-        public void UpdatePartial(Guid id, UpdateDefinition<T> builder)
+        public void Update(Expression<Func<T, bool>> condicao, Expression<Func<T, object>> expression, object value)
         {
-            _collectionName.UpdateOne(a => a.Id == id, builder);
+            _collectionName.UpdateOne(condicao, Builders<T>.Update.Set(expression, value));
+        }
+
+        public void Push(Expression<Func<T, bool>> condicao, Expression<Func<T, IEnumerable<object>>> expression, object value)
+        {
+            _collectionName.UpdateOne(condicao, Builders<T>.Update.Push(expression, value));
         }
 
         public void Delete(Guid id)

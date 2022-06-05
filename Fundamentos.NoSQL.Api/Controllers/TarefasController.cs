@@ -84,7 +84,7 @@ namespace Fundamentos.NoSQL.Controllers
 
                 tarefa.AtualizarTarefa(tarefaAtualizada.Nome, tarefaAtualizada.Detalhes, tarefaAtualizada.Concluido);
 
-                _tarefasService.Update(id, tarefa);
+                _tarefasService.Replace(id, tarefa);
 
                 return Ok(tarefa);
             }

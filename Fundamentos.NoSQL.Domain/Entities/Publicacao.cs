@@ -12,6 +12,9 @@ namespace Fundamentos.NoSQL.Domain.Entities
         {
             Name = name;
             Description = description;
+
+            Autores = new List<Autor>();
+            Comentarios = new List<Comentario>();
         }
 
         public string Name { get; set; }
@@ -27,13 +30,11 @@ namespace Fundamentos.NoSQL.Domain.Entities
 
         public void AdicionarAutor(string name)
         {
-            if (Autores == null) Autores = new List<Autor>();
             Autores.Add(new Autor(name));
         }
 
         public void AdicionarComentario(string name, string conteudo)
         {
-            if (Comentarios == null) Comentarios = new List<Comentario>();
             Comentarios.Add(new Comentario(name, conteudo, DateTime.Now));
         }
     }

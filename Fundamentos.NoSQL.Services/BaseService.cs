@@ -1,7 +1,6 @@
 ﻿using Fundamentos.NoSQL.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Fundamentos.NoSQL.Services
@@ -34,9 +33,19 @@ namespace Fundamentos.NoSQL.Services
             _repository.Insert(obj);
         }
 
-        public void Update(Guid id, T obj)
+        public void Replace(Guid id, T obj)
         {
-            _repository.Update(id, obj);
+            _repository.Replace(id, obj);
+        }
+
+        public void Update(Expression<Func<T, bool>> condicao, Expression<Func<T, object>> expression, object value)
+        {
+            _repository.Update(condicao, expression, value);
+        }
+
+        public void Push(Expression<Func<T, bool>> condicao, Expression<Func<T, IEnumerable<object>>> expression, object value)
+        {
+            _repository.Push(condicao, expression, value);
         }
 
         public void Delete(Guid id)

@@ -84,7 +84,7 @@ namespace Fundamentos.NoSQL.Controllers
 
                 user.AtualizarUsuario(usuarioAtualizado.Mail, usuarioAtualizado.Name);
 
-                _userServices.Update(id, user);
+                _userServices.Replace(id, user);
 
                 return Ok(user);
             }
