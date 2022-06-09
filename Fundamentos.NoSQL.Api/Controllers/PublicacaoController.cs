@@ -91,7 +91,12 @@ namespace Fundamentos.NoSQL.Controllers
                     return NotFound();
 
                 publicacao.AtualizarPublicacao(novaPublicacao.Nome, novaPublicacao.Description);
-                _publicacaoServices.Replace(id, publicacao);
+                _publicacaoServices.Update(p => p.Id == id, (update) =>
+                    update.Combine(new[] {
+                        update.Set(it => it.Name, publicacao.Name),
+                        update.Set(it => it.Description, publicacao.Description),
+                     })
+                );
 
                 return Ok(publicacao);
             }

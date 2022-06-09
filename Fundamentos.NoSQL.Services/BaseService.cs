@@ -1,4 +1,5 @@
 ﻿using Fundamentos.NoSQL.Domain.Interfaces;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -38,9 +39,9 @@ namespace Fundamentos.NoSQL.Services
             _repository.Replace(id, obj);
         }
 
-        public void Update(Expression<Func<T, bool>> condicao, Expression<Func<T, object>> field, object value)
+        public void Update(Expression<Func<T, bool>> condicao, Func<UpdateDefinitionBuilder<T>, UpdateDefinition<T>> updateFunction)
         {
-            _repository.Update(condicao, field, value);
+            _repository.Update(condicao, updateFunction);
         }
 
         public void Push(Expression<Func<T, bool>> condicao, Expression<Func<T, IEnumerable<object>>> field, object value)
